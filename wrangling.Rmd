@@ -4,27 +4,59 @@ author: "Kirill Batyuk"
 date: "October 22, 2018"
 output: html_document
 ---
+```{r}
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse) # install.packages("tidyverse")
+
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## read gapminder csv. Note the readr:: prefix identifies which package it's in
+gapminder <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv')
 
-```{r cars}
-summary(cars)
+#Inspect Dataset
+
+gapminder #looks at all the data
+
+head(gapminder) #head of dataset, first 6 rows
+tail(gapminder) #last 6 rows
+head(gapminder, 3) #first 3 rows
+
+#summary statistics
+str(gapminder) # data tructure
+summary(gapminder)
+
+
+#install.packages("skimr")
+skimr::skim(gapminder)
+
+names(gapminder) #column names
+dim(gapminder) # dimentions
+ncol(gapminder) #number of columns
+nrow(gapminder) #number of rows
+
+#reverse-engineer dim
+c(nrow(gapminder), ncol(gapminder))
+
+
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+#filter by rows
+filter(gapminder,lifeExp < 29)
+filter(gapminder, country == "Mexico") #display one country
+filter(gapminder, country %in% c("Mexico", "Peru")) #display multiple countries
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+
+
+
+
