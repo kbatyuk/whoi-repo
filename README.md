@@ -1,4 +1,4 @@
 # whoi-repo
-SWC at WHOI
+SOFTWARE CARPENTRY at WHOI
 
-by Kirill Batyuk
+Here is some new text. 
