@@ -90,3 +90,86 @@ ggplot(data=se) +
         axis.text.x = element_text(angle=45, size=14))
   
 ```
+
+#Faceting plots
+
+```{r}
+ggplot(data=se)+
+  geom_point(aes(x=year, y=visitors, color=park_name)) +
+  facet_wrap(~ state, scales = "free") +
+  theme(axis.text.x = element_text(angle=90))
+```
+
+
+# geoms
+
+```{r}
+
+ggplot(data = se) +
+  geom_jitter(aes(x=park_name, y=visitors), alpha = 0.4, width = 0.1) +
+  coord_flip()
+```
+
+```{r}
+ggplot(se) +
+  geom_line(aes(x=year, y=visitors, color=park_name)) +
+  theme_bw()
+
+
+```
+
+
+#Multiple goms on one plot
+
+```{r}
+
+ggplot(data = acadia) +
+  geom_point(aes(x=year, y=visitors))+
+  geom_line(aes(x=year, y=visitors))+
+  geom_smooth(aes(x=year, y=visitors))
+
+
+```
+
+#Same as above but less typing:
+
+```{r}
+
+ggplot(data = acadia, aes(x=year, y=visitors)) +
+  geom_point()+
+  geom_line()+
+  geom_smooth()
+
+
+```
+
+
+```{r}
+
+install.packages("ggthemes")
+library(ggthemes)
+```
+
+#bar charts
+
+
+```{r}
+
+ggplot(data = visit_16, aes(x=state, y=visitors, fill = park_name)) +
+  geom_bar(stat = "identity", position ="dodge")
+
+
+```
+
+#Save a ggplot
+
+```{r}
+
+myplot <- ggplot(data = visit_16, aes(x=state, y=visitors, fill = park_name)) +
+  geom_bar(stat = "identity", position ="dodge")
+
+myplot
+ggsave (filename = "myplot.png", myplot)
+
+```
+
