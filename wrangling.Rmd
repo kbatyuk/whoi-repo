@@ -50,10 +50,74 @@ c(nrow(gapminder), ncol(gapminder))
 filter(gapminder,lifeExp < 29)
 filter(gapminder, country == "Mexico") #display one country
 filter(gapminder, country %in% c("Mexico", "Peru")) #display multiple countries
+filter(gapminder, country == "Mexico", year == 2002)
 ```
 
 
+```{r}
+sweden <- filter(gapminder, country == "Sweden")
+mean(sweden$lifeExp)
+```
 
+
+```{r}
+#select by columns
+select(gapminder, year, lifeExp)
+select(gapminder, -continent, -lifeExp) #exludes columns
+
+#use selet and filter together
+gap_cambodia <- filter(gapminder, country == "Cambodia")
+gap_cambodia2 <- select(gap_cambodia,-continent, -lifeExp)
+
+
+```
+
+
+Pipe operator will change your life
+
+```{r}
+#this
+gapminder %>% head()
+#same as this
+head(gapminder, 3)
+
+```
+
+
+```{r}
+
+#improve above
+gap_cambodia <- gapminder %>% filter(country == "Cambodia")
+gap_cambodia2 <- gap_cambodia %>% select(-continent, -lifeExp)
+
+#same as this but better:
+
+gap_cambodia <- gapminder %>%
+  filter(country == "Cambodia") %>%
+  select(-continent, -lifeExp)
+```
+
+
+```{r}
+#mutate adds new variables
+
+gapminder %>% 
+  mutate(index = 1:nrow(gapminder)) #adds rownumbers 1 - end
+
+gapminder %>% 
+  mutate(planet = "Earth") #adds earth as planent to every row
+
+gapminder %>% 
+  mutate(gdp = pop * gdpPercap)
+
+## Callenge
+## find the maximum gdpPerCap of egypt and Vietnam. Create a new column. (one number that is max of two countries)
+
+gapminder %>% 
+  filter(country %in% c("Egypt", "Vietnam")) %>% 
+  mutate(gdp = pop * gdpPercap, max_gdp = max(gdp)) 
+
+```
 
 
 
