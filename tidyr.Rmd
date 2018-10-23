@@ -107,6 +107,14 @@ gap_back <- gap_long %>%
 ```
 
 
+##same as above
+
+```{r}
+gap_wide_new <- gap_long %>% 
+  unite (col = var_names, obs_type, year, sep="_") %>% 
+  spread(key = var_names,
+         value = obs_value)
+```
 
 
 
