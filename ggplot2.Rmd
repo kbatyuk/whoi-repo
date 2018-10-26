@@ -144,11 +144,6 @@ ggplot(data = acadia, aes(x=year, y=visitors)) +
 ```
 
 
-```{r}
-
-install.packages("ggthemes")
-library(ggthemes)
-```
 
 #bar charts
 
